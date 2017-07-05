@@ -26,7 +26,7 @@ RUN apt-add-repository ppa:nginx/stable -y && \
     sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/postgresql.list' && \
     curl -s https://packagecloud.io/gpg.key | apt-key add - && \
     echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
-    curl --silent --location https://deb.nodesource.com/setup_5.x | bash - && \
+    curl --silent --location https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update    
 
 # set the locale
@@ -105,7 +105,6 @@ RUN composer global require "laravel/envoy"
 RUN composer global require "laravel/installer"
 
 # install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
 # install zsh
