@@ -12,7 +12,7 @@ alias fd='find . -type d -name'
 
 alias now='date +%T'
 
-alias art='php artisan'
+alias a='php artisan'
 
 alias phpspec='vendor/bin/phpspec'
 alias phpunit='vendor/bin/phpunit'
