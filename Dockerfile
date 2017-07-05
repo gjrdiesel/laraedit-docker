@@ -28,7 +28,7 @@ RUN apt-add-repository ppa:nginx/stable -y && \
     curl -s https://packagecloud.io/gpg.key | apt-key add - && \
     echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
     curl --silent --location https://deb.nodesource.com/setup_5.x | bash - && \
-    apt-get update
+    apt-get update    
 
 # set the locale
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale  && \
@@ -98,9 +98,6 @@ VOLUME ["/var/lib/mysql"]
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     printf "\nPATH=\"~/.composer/vendor/bin:\$PATH\"\n" | tee -a ~/.bashrc
-    
-# install prestissimo
-# RUN composer global require "hirak/prestissimo"
 
 # install laravel envoy
 RUN composer global require "laravel/envoy"
@@ -109,19 +106,17 @@ RUN composer global require "laravel/envoy"
 RUN composer global require "laravel/installer"
 
 # install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
-# install gulp
-RUN /usr/bin/npm install -g gulp
-
-# install bower
-RUN /usr/bin/npm install -g bower
+# install zsh
+RUN apt-get install zsh
+RUN apt-get install git-core
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+RUN chsh -s `which zsh`
 
 # install redis 
 RUN apt-get install -y redis-server
-
-# install blackfire
-RUN apt-get install -y blackfire-agent blackfire-php
 
 # install beanstalkd
 RUN apt-get install -y --force-yes beanstalkd && \
